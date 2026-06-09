@@ -37,9 +37,10 @@ Acadimiat's typography reflects elegance and sophistication. These are **Primiti
 
 | Token | Value | Usage |
 |-------|-------|-------|
-| `font-family-display` | `'IBM Plex Sans Arabic', sans-serif` | Large display headings (can be swapped per product) |
+| `font-family-display` | `'IBM Plex Sans Arabic', sans-serif` | Default display headings — dashboard, app UI |
+| `font-family-display-landing` | `'El Messiri', sans-serif` | Landing page hero and section headings |
 
-> **Note:** The display font can be replaced with a premium serif or decorative font per product line (e.g., landing pages vs. dashboard). The token remains the same — only the value changes at the theme level.
+> **Note:** `font-family-display` is the default. On the landing page, `--font-family-display` is overridden to `El Messiri` via the `[data-product="landing"]` theme block — token names never change, only the resolved value.
 
 ---
 
@@ -48,9 +49,12 @@ Acadimiat's typography reflects elegance and sophistication. These are **Primiti
 | Token | Value | Name |
 |-------|-------|------|
 | `font-weight-regular` | `400` | Regular |
+| `font-weight-display` | `480` | Display — El Messiri variable font only |
 | `font-weight-medium` | `500` | Medium |
 | `font-weight-semibold` | `600` | Semibold |
 | `font-weight-bold` | `700` | Bold |
+
+> `font-weight-display` (480) is a variable font axis value. It is only valid with El Messiri — do not apply it to IBM Plex Sans Arabic or Inter.
 
 ---
 
@@ -119,16 +123,18 @@ Range: **1.2 – 2.0**
 ```css
 :root {
   /* Font Families */
-  --font-family-arabic: 'IBM Plex Sans Arabic', sans-serif;
-  --font-family-arabic-alt: 'Readex Pro', sans-serif;
-  --font-family-latin: 'Inter', system-ui, sans-serif;
-  --font-family-display: 'IBM Plex Sans Arabic', sans-serif;
+  --font-family-arabic:           'IBM Plex Sans Arabic', sans-serif;
+  --font-family-arabic-alt:       'Readex Pro', sans-serif;
+  --font-family-latin:            'Inter', system-ui, sans-serif;
+  --font-family-display:          'IBM Plex Sans Arabic', sans-serif; /* default */
+  --font-family-display-landing:  'El Messiri', sans-serif;
 
   /* Font Weights */
-  --font-weight-regular: 400;
-  --font-weight-medium: 500;
+  --font-weight-regular:  400;
+  --font-weight-display:  480; /* El Messiri variable font only */
+  --font-weight-medium:   500;
   --font-weight-semibold: 600;
-  --font-weight-bold: 700;
+  --font-weight-bold:     700;
 
   /* Font Sizes */
   --font-size-xs:   0.75rem;    /* 12px */
@@ -200,3 +206,9 @@ Range: **1.2 – 2.0**
 - Display font can be swapped per product line at the theme level without changing token names
 - Semantic typography tokens (e.g., `--app-text-heading`, `--app-text-body`) are defined in the Semantic layer
 - No `letter-spacing` for Arabic text — ever
+- El Messiri is loaded as a variable font from Google Fonts — request the full weight axis range:
+  ```html
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@400..700&display=swap">
+  ```
+- `font-weight-display` (480) is only valid with El Messiri — variable axis value between Regular and Medium

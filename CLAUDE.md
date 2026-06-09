@@ -152,8 +152,10 @@ owner: acadimiat
 - Every visual value in a component spec must show the **Semantic token name** (`--bg-color-brand`), never a raw value.
 - Sizes are listed as both token name and resolved px — e.g. `--spacing-inset-xl` (24px).
 - States covered: Default, Hover, Pressed, Disabled, Focus. No state may be omitted.
+- Shape modifiers (rounded, pill) are a separate axis from size — documented in a dedicated Radius Shape Modifiers table.
 - Icon-only variants require a separate size table (square dimensions).
-- Loading state must be documented if the component triggers async actions.
+- Loading state must be documented with full CSS (`.btn-loading`, `.btn-spinner`, `@keyframes`) if the component triggers async actions.
+- Motion must be documented in a dedicated **Motion & Animation** table showing duration, easing, and visible effect per interaction.
 
 ---
 
@@ -166,6 +168,7 @@ owner: acadimiat
 - **Non-directional icons** (plus, check, x, download, search, trash) → never mirror.
 - No `letter-spacing` on Arabic text. Ever. Not even `0`.
 - `font-family` for Arabic text always leads with `'IBM Plex Sans Arabic'`.
+- On the landing page (`data-product="landing"`), display/heading-1/heading-2 use `'El Messiri'` at weight 480 — applied via the `[data-product="landing"]` CSS block in `Semantic/typography.md`, not inline.
 
 ---
 
@@ -197,13 +200,14 @@ These apply to every component spec written in this repo:
 |----------|-------|
 | Brand color | `#65398D` → `purple-500` |
 | Primary font | `'IBM Plex Sans Arabic'` |
+| Landing page headings | `'El Messiri'` — weight 480 (variable font), display + heading-1 + heading-2 only |
 | Alt font | `'Readex Pro'` — dashboard-heavy interfaces only |
 | Latin font | `'Inter'` — English content only |
 | Icon library | Lucide Icons — `stroke-width: 2`, never filled |
 | Spacing base | 4px unit, 8px grid |
-| Theme control | `data-theme` attribute on `<html>` |
+| Theme control | `data-theme` on `<html>` (light/dark) + `data-product="landing"` for landing page font overrides |
 | Focus ring | `2px solid --border-color-focus`, offset 2px, `:focus-visible` |
-| Transition | `150ms ease` on `background-color`, `border-color`, `color` |
+| Transition | `200ms cubic-bezier(0,0,0.2,1)` on color + box-shadow + transform; `150ms` on transform press |
 
 ---
 

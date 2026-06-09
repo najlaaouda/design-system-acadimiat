@@ -72,7 +72,7 @@ Foundations are the raw values the entire system is built on. They are **never a
 | Foundation | File | What It Defines |
 |------------|------|-----------------|
 | Color | `Specs/Foundations/Color.md` | 6 palettes × 10 steps: purple, neutral, green, yellow, blue, red. Plus base-white and white-alpha scale. |
-| Typography | `Specs/Foundations/Typography.md` | Font families, weights (400–700), size scale (12px–72px), line heights, paragraph spacing. |
+| Typography | `Specs/Foundations/Typography.md` | Font families (IBM Plex Sans Arabic, El Messiri for landing page), weights (400–700 + 480 variable), size scale (12px–72px), line heights. |
 | Spacing | `Specs/Foundations/Spacing.md` | 4px-base scale from `space-0` to `space-24`. Inset, inline, stack, and layout patterns. |
 | Border | `Specs/Foundations/Border.md` | Border width scale (0–4px) and border style tokens (solid, dashed, dotted). |
 | Radius | `Specs/Foundations/Radius.md` | Border radius scale from `radius-none` to `radius-full`. |
@@ -142,7 +142,22 @@ Themes are additive CSS blocks. Token names never change between themes — only
 }
 ```
 
-Adding a new theme (`[data-theme="high-contrast"]`, `[data-theme="brand-dark"]`) requires only a new CSS block — no component code changes.
+A second theme axis — `data-product` — handles product-level overrides that are not color/dark-mode related:
+
+```html
+<html dir="rtl" data-theme="light" data-product="landing">
+```
+
+```css
+[data-product="landing"] {
+  --font-family-display:   var(--font-family-display-landing); /* El Messiri */
+  --type-display-weight:   var(--font-weight-display);         /* 480        */
+  --type-heading-1-weight: var(--font-weight-display);
+  --type-heading-2-weight: var(--font-weight-display);
+}
+```
+
+The two axes are independent — `data-theme` controls colors, `data-product` controls product-level typography and layout overrides.
 
 ---
 
@@ -225,10 +240,11 @@ Every interactive element uses the same focus ring — defined once at system le
 
 | Interaction type | Duration token | Easing token |
 |-----------------|----------------|--------------|
-| Hover / toggle / button press | `duration-fast` (150ms) | `easing-out` |
+| Button hover (color + shadow + lift) | `duration-normal` (200ms) | `easing-out` — `cubic-bezier(0,0,0.2,1)` |
+| Button press (scale sink) | `duration-fast` (150ms) | `easing-out` |
 | Dropdown / tooltip / tab | `duration-normal` (250ms) | `easing-out` |
 | Modal / drawer / page transition | `duration-slow` (350ms) | `easing-in-out` |
-| Spinner / progress bar | — | `easing-linear` |
+| Loading spinner (`btn-spin`) | 600ms | `easing-linear` — infinite loop |
 
 Always wrap transitions in `@media (prefers-reduced-motion: reduce) { transition: none; }`.
 
@@ -251,7 +267,7 @@ The design system enforces correctness at the spec level. These rules are stated
 | `color: var(--purple-500)` in a component | Primitive in component skips Semantic tier | Use `var(--text-color-brand)` |
 | `padding-left: 16px` | Direction-specific property breaks RTL | Use `padding-inline-start: var(--spacing-inset-lg)` |
 | `letter-spacing: 0.05em` on Arabic text | Arabic script must never have letter-spacing | Remove it entirely |
-| `transition: all 0.3s` | Targets too many properties, too slow | Use `transition: background-color 150ms ease` |
+| `transition: all 0.3s` | Targets too many properties, too slow | Use `transition: background-color 200ms cubic-bezier(0,0,0.2,1), transform 150ms cubic-bezier(0,0,0.2,1)` |
 
 ---
 

@@ -300,6 +300,21 @@ No visible label. The accessible label is provided via `aria-label`.
 
 ---
 
+## Motion & Animation
+
+| Interaction | Property | Duration | Easing | Effect |
+|------------|----------|----------|--------|--------|
+| Hover enter | `transform`, `background-color`, `box-shadow` | 200ms | `cubic-bezier(0, 0, 0.2, 1)` — easing-out | Lifts `translateY(-1px)` + brand shadow appears |
+| Hover leave | same | 200ms | `cubic-bezier(0, 0, 0.2, 1)` | Returns to resting position |
+| Press (active) | `transform` | 150ms | `cubic-bezier(0, 0, 0.2, 1)` | Sinks `scale(0.98)` + shadow removed |
+| Loading spinner | `transform: rotate` | 600ms | `linear` — infinite | Full rotation loop |
+
+> The lift on hover (`translateY(-1px)`) is the primary visible motion cue — it signals interactivity clearly without being distracting.
+> The press sink (`scale(0.98)`) gives physical feedback confirming the click registered.
+> `prefers-reduced-motion` removes all transforms and reverts to color-only transitions.
+
+---
+
 ## CSS Implementation
 
 ```css
@@ -320,8 +335,16 @@ No visible label. The accessible label is provided via `aria-label`.
   cursor:          pointer;
   border:          none;
   text-decoration: none;
-  transition:      background-color 150ms ease, border-color 150ms ease, color 150ms ease;
+  transition:
+    background-color 200ms cubic-bezier(0, 0, 0.2, 1),
+    border-color     200ms cubic-bezier(0, 0, 0.2, 1),
+    color            200ms cubic-bezier(0, 0, 0.2, 1),
+    box-shadow       200ms cubic-bezier(0, 0, 0.2, 1),
+    transform        150ms cubic-bezier(0, 0, 0.2, 1);
 }
+
+.btn:hover  { transform: translateY(-1px); }
+.btn:active { transform: translateY(0px) scale(0.98); }
 
 .btn:focus-visible {
   outline:        2px solid var(--border-color-focus);
@@ -332,6 +355,7 @@ No visible label. The accessible label is provided via `aria-label`.
 .btn[aria-disabled="true"] {
   cursor:         not-allowed;
   pointer-events: none;
+  transform:      none;
 }
 
 /* ── Sizes ────────────────────────────────────────────── */
@@ -383,12 +407,19 @@ No visible label. The accessible label is provided via `aria-label`.
   color:            var(--text-color-on-brand);
   border:           none;
 }
-.btn-primary:hover  { background-color: var(--bg-color-brand-hover);    }
-.btn-primary:active { background-color: var(--bg-color-brand-pressed);  }
+.btn-primary:hover {
+  background-color: var(--bg-color-brand-hover);
+  box-shadow:       var(--elevation-brand-2);
+}
+.btn-primary:active {
+  background-color: var(--bg-color-brand-pressed);
+  box-shadow:       none;
+}
 .btn-primary:disabled,
 .btn-primary[aria-disabled="true"] {
   background-color: var(--bg-color-disabled);
   color:            var(--text-color-disabled);
+  box-shadow:       none;
 }
 
 /* Secondary */
@@ -397,12 +428,19 @@ No visible label. The accessible label is provided via `aria-label`.
   color:            var(--text-color-brand);
   border:           1.5px solid var(--border-color-brand);
 }
-.btn-secondary:hover  { background-color: var(--bg-color-brand-subtle); }
-.btn-secondary:active { background-color: var(--bg-color-brand-hover);  }
+.btn-secondary:hover {
+  background-color: var(--bg-color-brand-subtle);
+  box-shadow:       var(--elevation-brand-1);
+}
+.btn-secondary:active {
+  background-color: var(--bg-color-brand-hover);
+  box-shadow:       none;
+}
 .btn-secondary:disabled,
 .btn-secondary[aria-disabled="true"] {
-  color:            var(--text-color-disabled);
-  border-color:     var(--border-color-disabled);
+  color:        var(--text-color-disabled);
+  border-color: var(--border-color-disabled);
+  box-shadow:   none;
 }
 
 /* Tertiary */
@@ -446,9 +484,35 @@ No visible label. The accessible label is provided via `aria-label`.
   --btn-radius: var(--radius-full); /* 9999px */
 }
 
+/* ── Loading ──────────────────────────────────────────── */
+.btn-loading {
+  cursor:         wait;
+  pointer-events: none;
+  position:       relative;
+}
+
+.btn-loading .btn-label {
+  opacity: 0.7;
+}
+
+.btn-spinner {
+  animation: btn-spin 600ms linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes btn-spin {
+  from { transform: rotate(0deg);   }
+  to   { transform: rotate(360deg); }
+}
+
 /* ── Reduced motion ───────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
-  .btn { transition: none; }
+  .btn {
+    transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
+  }
+  .btn:hover  { transform: none; }
+  .btn:active { transform: none; }
+  .btn-spinner { animation: none; }
 }
 ```
 
@@ -531,15 +595,26 @@ Use `aria-disabled="true"` when the button needs a tooltip explaining **why** it
 When a button triggers an async action:
 
 ```html
-<button class="btn btn-primary btn-md" aria-busy="true" aria-label="جارٍ الإرسال…">
-  <svg class="btn-icon btn-spinner" aria-hidden="true"><!-- spinner --></svg>
+<button class="btn btn-primary btn-md btn-loading"
+        aria-busy="true"
+        aria-disabled="true"
+        aria-label="جارٍ الإرسال…">
+  <svg class="btn-icon btn-spinner" aria-hidden="true"><!-- loader-2 (Lucide) --></svg>
   <span class="btn-label">جارٍ الإرسال…</span>
 </button>
 ```
 
-- Replace the leading/trailing icon with a spinner icon
-- Keep the button **disabled** during loading (`aria-disabled="true"`)
-- Update the `aria-label` to reflect the in-progress state
+| Property | Value | Why |
+|----------|-------|-----|
+| `aria-busy="true"` | Always | Tells screen readers an operation is in progress |
+| `aria-disabled="true"` | Always | Prevents re-click; keeps button focusable for the busy announcement |
+| `.btn-loading` | Always | Sets `cursor: wait`, dims label, disables pointer events |
+| `.btn-spinner` | Always | Applies `animation: btn-spin 600ms linear infinite` |
+| Icon | `loader-2` from Lucide | Circular spinner — replaces any leading/trailing icon |
+| Label | Updated Arabic text | Reflects in-progress state, e.g. "جارٍ الحفظ…" |
+
+- Remove `.btn-loading` and `aria-busy` / `aria-disabled` once the action resolves
+- On success/error: restore original label and icon before re-enabling
 
 ---
 

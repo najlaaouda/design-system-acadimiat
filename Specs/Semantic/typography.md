@@ -52,7 +52,7 @@ Primitive values are defined in `Foundations/Typography.md`.
 ### RTL & Language Notes
 
 - All roles use `font-family-arabic` by default — Arabic is the primary language.
-- `type-display` uses `font-family-display`, which can be swapped per product at the theme level.
+- `type-display` and `type-heading-1/2` use `font-family-display`, which resolves to **El Messiri** on the landing page via `[data-product="landing"]`.
 - When English content is present, swap `font-family-arabic` for `font-family-latin` at the component level. Token names stay the same.
 - Never apply `letter-spacing` to Arabic text.
 
@@ -64,12 +64,12 @@ Primitive values are defined in `Foundations/Typography.md`.
 
 Used for hero sections and large marketing headlines. Largest text in the system.
 
-| Property | Token | Primitive | Value |
-|----------|-------|-----------|-------|
-| Family | `type-display-family` | → `font-family-display` | IBM Plex Sans Arabic |
-| Size | `type-display-size` | → `font-size-10xl` | 72px / 4.5rem |
-| Weight | `type-display-weight` | → `font-weight-bold` | 700 |
-| Line Height | `type-display-line-height` | → `line-height-tight` | 1.2 |
+| Property | Token | Primitive | Default (App) | Landing Page |
+|----------|-------|-----------|---------------|--------------|
+| Family | `type-display-family` | → `font-family-display` | IBM Plex Sans Arabic | **El Messiri** |
+| Size | `type-display-size` | → `font-size-10xl` | 72px / 4.5rem | 72px / 4.5rem |
+| Weight | `type-display-weight` | → `font-weight-bold` / `font-weight-display` | 700 | **480** |
+| Line Height | `type-display-line-height` | → `line-height-tight` | 1.2 | 1.2 |
 
 ---
 
@@ -79,14 +79,14 @@ Structural hierarchy for page, section, and panel titles.
 
 | Role | Property | Primitive | Value |
 |------|----------|-----------|-------|
-| `type-heading-1` | Family | → `font-family-arabic` | IBM Plex Sans Arabic |
-| | Size | → `font-size-8xl` | 56px / 3.5rem |
-| | Weight | → `font-weight-bold` | 700 |
-| | Line Height | → `line-height-tight` | 1.2 |
-| `type-heading-2` | Family | → `font-family-arabic` | IBM Plex Sans Arabic |
-| | Size | → `font-size-7xl` | 48px / 3rem |
-| | Weight | → `font-weight-bold` | 700 |
-| | Line Height | → `line-height-tight` | 1.2 |
+| `type-heading-1` | Family | → `font-family-display` | IBM Plex Sans Arabic | **El Messiri** on landing |
+| | Size | → `font-size-8xl` | 56px / 3.5rem | 56px / 3.5rem |
+| | Weight | → `font-weight-bold` / `font-weight-display` | 700 | **480** on landing |
+| | Line Height | → `line-height-tight` | 1.2 | 1.2 |
+| `type-heading-2` | Family | → `font-family-display` | IBM Plex Sans Arabic | **El Messiri** on landing |
+| | Size | → `font-size-7xl` | 48px / 3rem | 48px / 3rem |
+| | Weight | → `font-weight-bold` / `font-weight-display` | 700 | **480** on landing |
+| | Line Height | → `line-height-tight` | 1.2 | 1.2 |
 | `type-heading-3` | Family | → `font-family-arabic` | IBM Plex Sans Arabic |
 | | Size | → `font-size-6xl` | 40px / 2.5rem |
 | | Weight | → `font-weight-semibold` | 600 |
@@ -332,6 +332,21 @@ Only display, heading, and body-lg roles change size across breakpoints. Body, l
     --type-body-lg-size:   var(--font-size-xl);   /* 20px */
   }
 }
+
+/* ── Landing Page Theme ─────────────────────────────────── */
+/* Add data-product="landing" to <html> on the landing page  */
+[data-product="landing"] {
+  --font-family-display:      var(--font-family-display-landing); /* El Messiri */
+
+  --type-display-family:      var(--font-family-display-landing);
+  --type-display-weight:      var(--font-weight-display);         /* 480 */
+
+  --type-heading-1-family:    var(--font-family-display-landing);
+  --type-heading-1-weight:    var(--font-weight-display);         /* 480 */
+
+  --type-heading-2-family:    var(--font-family-display-landing);
+  --type-heading-2-weight:    var(--font-weight-display);         /* 480 */
+}
 ```
 
 ### Usage Pattern
@@ -361,8 +376,11 @@ Only display, heading, and body-lg roles change size across breakpoints. Body, l
 | Style Name | Family | Size | Weight | Line Height |
 |------------|--------|------|--------|-------------|
 | `type/display` | IBM Plex Sans Arabic | 72 | Bold (700) | 1.2 |
+| `type/display-landing` | **El Messiri** | 72 | **480** | 1.2 |
 | `type/heading-1` | IBM Plex Sans Arabic | 56 | Bold (700) | 1.2 |
+| `type/heading-1-landing` | **El Messiri** | 56 | **480** | 1.2 |
 | `type/heading-2` | IBM Plex Sans Arabic | 48 | Bold (700) | 1.2 |
+| `type/heading-2-landing` | **El Messiri** | 48 | **480** | 1.2 |
 | `type/heading-3` | IBM Plex Sans Arabic | 40 | SemiBold (600) | 1.35 |
 | `type/heading-4` | IBM Plex Sans Arabic | 36 | SemiBold (600) | 1.35 |
 | `type/heading-5` | IBM Plex Sans Arabic | 32 | Medium (500) | 1.5 |
