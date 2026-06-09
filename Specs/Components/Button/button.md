@@ -139,6 +139,19 @@ Icon-only buttons are perfectly square. No label is rendered.
 | Medium | 40px | 40px | `icon-size-default` — 20px | `radius-md` — 8px |
 | Small | 32px | 32px | `icon-size-inline` — 16px | `radius-md` — 8px |
 
+### Radius Shape Modifiers
+
+Radius shape is a separate axis from size. Any size can use any shape — apply a modifier class alongside the size class.
+
+| Shape | Class | Token | Value | When to Use |
+|-------|-------|-------|-------|-------------|
+| Default | _(none)_ | per size | 8px or 12px | Standard UI — forms, tables, modals |
+| Rounded | `.btn-rounded` | `--radius-xl` — 16px | 16px | Softer UI — landing pages, marketing |
+| Pill | `.btn-pill` | `--radius-full` — 9999px | 9999px | CTAs, tags, hero sections |
+
+> Shape modifiers override `--btn-radius` only — all other size tokens remain unchanged.
+> Pill icon-only buttons become perfect circles.
+
 ---
 
 ## Icon Positions
@@ -248,12 +261,21 @@ No visible label. The accessible label is provided via `aria-label`.
 
 ### Radius Tokens
 
+**Default (per size):**
+
 | Size | Token | Value |
 |------|-------|-------|
 | XLarge | `--radius-lg` | 12px |
 | Large | `--radius-lg` | 12px |
 | Medium | `--radius-md` | 8px |
 | Small | `--radius-md` | 8px |
+
+**Shape modifiers (override default):**
+
+| Shape | Token | Value |
+|-------|-------|-------|
+| Rounded | `--radius-xl` | 16px |
+| Pill | `--radius-full` | 9999px |
 
 ---
 
@@ -415,6 +437,15 @@ No visible label. The accessible label is provided via `aria-label`.
   padding-inline: 0;
 }
 
+/* ── Radius Shape Modifiers ───────────────────────────── */
+.btn-rounded {
+  --btn-radius: var(--radius-xl);   /* 16px */
+}
+
+.btn-pill {
+  --btn-radius: var(--radius-full); /* 9999px */
+}
+
 /* ── Reduced motion ───────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   .btn { transition: none; }
@@ -520,6 +551,7 @@ When a button triggers an async action:
 Button
 ├── Variant: Primary / Secondary / Tertiary
 ├── Size:    XLarge / Large / Medium / Small
+├── Shape:   Default / Rounded / Pill
 ├── State:   Default / Hover / Pressed / Disabled / Focus
 └── Icon:    None / Leading / Trailing / Icon Only
 ```
@@ -541,8 +573,10 @@ Button
 | Icon fill (Primary) | `semantic/icon-color-on-brand` |
 | Icon fill (Secondary / Tertiary) | `semantic/icon-color-brand` |
 | Icon fill (Disabled) | `semantic/icon-color-disabled` |
-| Corner radius (XL / LG) | `semantic/radius-lg` |
-| Corner radius (MD / SM) | `semantic/radius-md` |
+| Corner radius (XL / LG — Default) | `semantic/radius-lg` |
+| Corner radius (MD / SM — Default) | `semantic/radius-md` |
+| Corner radius (any size — Rounded) | `semantic/radius-xl` |
+| Corner radius (any size — Pill) | `primitive/radius-full` |
 | Padding inline (XL / LG) | `semantic/spacing-inset-xl` |
 | Padding inline (MD) | `semantic/spacing-inset-lg` |
 | Padding inline (SM) | `semantic/spacing-inset-md` |
