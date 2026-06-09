@@ -74,6 +74,7 @@ Foundations are the raw values the entire system is built on. They are **never a
 | Color | `Specs/Foundations/Color.md` | 6 palettes × 10 steps: purple, neutral, green, yellow, blue, red. Plus base-white and white-alpha scale. |
 | Typography | `Specs/Foundations/Typography.md` | Font families, weights (400–700), size scale (12px–72px), line heights, paragraph spacing. |
 | Spacing | `Specs/Foundations/Spacing.md` | 4px-base scale from `space-0` to `space-24`. Inset, inline, stack, and layout patterns. |
+| Border | `Specs/Foundations/Border.md` | Border width scale (0–4px) and border style tokens (solid, dashed, dotted). |
 | Radius | `Specs/Foundations/Radius.md` | Border radius scale from `radius-none` to `radius-full`. |
 | Elevation | `Specs/Foundations/Elevation.md` | 6 neutral shadow levels + brand (purple-tinted) shadow scale. |
 | Motion | `Specs/Foundations/Motion.md` | 3 durations (150ms / 250ms / 350ms) + 4 easing curves. Max: 350ms. |

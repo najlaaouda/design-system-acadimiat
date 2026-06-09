@@ -19,6 +19,7 @@ Specs/
 │   ├── Color.md          — palettes: purple, neutral, green, yellow, blue, red, alpha
 │   ├── Typography.md     — font families, weights, sizes, line heights, paragraph spacing
 │   ├── Spacing.md        — 4px-base scale (space-0 → space-24), inset/inline/stack patterns
+│   ├── Border.md         — border width scale + border style tokens
 │   ├── Radius.md         — border radius scale
 │   ├── Elevation.md      — shadow/depth scale
 │   ├── Motion.md         — duration and easing tokens
