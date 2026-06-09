@@ -1,4 +1,4 @@
-# Acadimiat — Landing Page
+# Acadimiat 
 
 The official landing page for **Acadimiat**, an Arabic-first EdTech platform.
 
