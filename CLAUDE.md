@@ -41,8 +41,14 @@ Specs/
 │   └── chart-color.md    — --chart-color-* for data visualisation
 │
 ├── Components/           ← Component specs — consume Semantic tokens only
-│   └── Button/
-│       └── button.md     — Primary/Secondary/Tertiary, sizes SM→XL, RTL, a11y, CSS
+│   ├── Button/
+│   │   └── button.md     — Primary/Secondary/Tertiary, sizes SM→XL, RTL, a11y, CSS
+│   ├── Card/
+│   │   └── card.md       — Elevated/Outlined/Filled, Static/Interactive, sizes, skeleton loading
+│   ├── BottomNav/
+│   │   └── bottom-nav.md — Mobile-only tab bar, Pill/Minimal indicator, badges, center action
+│   └── Tabs/
+│       └── tabs.md       — Underline/Segmented, Fixed/Scrollable, WAI-ARIA tabs pattern
 │
 └── Charts/               ← Chart component specs
     ├── line-chart.md
@@ -95,6 +101,7 @@ The system uses `rem` for type and spacing. Raw `px` is allowed **only** for:
 - Border width on components: `1.5px` (Secondary button stroke)
 - Fixed component heights in size tables: `32px`, `40px`, `48px`, `56px`
 - Icon `width`/`height` when set by a size token (`--icon-size-default` resolves to `20px`)
+- Device safe-area accommodation: `env(safe-area-inset-bottom)` on fixed edge-anchored surfaces (e.g. Bottom Navigation) — this is a physical device value, not a design decision, and must never be replaced with a spacing token
 
 Everything else must use a token.
 
@@ -152,6 +159,7 @@ owner: acadimiat
 - Every visual value in a component spec must show the **Semantic token name** (`--bg-color-brand`), never a raw value.
 - Sizes are listed as both token name and resolved px — e.g. `--spacing-inset-xl` (24px).
 - States covered: Default, Hover, Pressed, Disabled, Focus. No state may be omitted.
+- Contextual states beyond the mandatory five (e.g. Selected, Active) are allowed when the component needs them — document them as additional rows in the same Variants & States tables, never as a silent substitute for one of the five (Card's Selected, Tabs' Selected, Bottom Navigation's Active all extend rather than replace the base set).
 - Shape modifiers (rounded, pill) are a separate axis from size — documented in a dedicated Radius Shape Modifiers table.
 - Icon-only variants require a separate size table (square dimensions).
 - Loading state must be documented with full CSS (`.btn-loading`, `.btn-spinner`, `@keyframes`) if the component triggers async actions.
@@ -208,6 +216,7 @@ These apply to every component spec written in this repo:
 | Theme control | `data-theme` on `<html>` (light/dark) + `data-product="landing"` for landing page font overrides |
 | Focus ring | `2px solid --border-color-focus`, offset 2px, `:focus-visible` |
 | Transition | `200ms cubic-bezier(0,0,0.2,1)` on color + box-shadow + transform; `150ms` on transform press |
+| Accent / selected-indicator border | `border-4` (e.g. Tabs active underline) — never repurpose `border-2`, which is reserved exclusively for focus rings |
 
 ---
 

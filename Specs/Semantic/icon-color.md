@@ -2,7 +2,7 @@
 name: Icon Color Semantic Tokens
 tier: Semantic
 status: Active
-last-updated: 2026-06-08
+last-updated: 2026-07-07
 maintainer: n.ouda@eltgcc.com
 owner: acadimiat
 ---
@@ -58,6 +58,7 @@ Set `data-theme` on the root element. Adding a new theme requires only a new CSS
 | `icon-color-disabled` | → `neutral-300` | → `white-alpha-30` | Disabled icon state |
 | `icon-color-brand` | → `purple-500` | → `purple-300` | Brand-colored icons — active nav, highlights |
 | `icon-color-on-brand` | → `base-white` | → `base-white` | Icons on top of a brand-colored background |
+| `icon-color-on-error` | → `base-white` | → `base-white` | Icons on top of an error/destructive-colored background |
 | `icon-color-success` | → `green-500` | → `green-400` | Success state icons |
 | `icon-color-warning` | → `yellow-500` | → `yellow-400` | Warning state icons |
 | `icon-color-error` | → `red-500` | → `red-400` | Error state icons |
@@ -77,6 +78,7 @@ Set `data-theme` on the root element. Adding a new theme requires only a new CSS
   --icon-color-disabled:  var(--neutral-300);
   --icon-color-brand:     var(--purple-500);
   --icon-color-on-brand:  var(--base-white);
+  --icon-color-on-error:  var(--base-white);
   --icon-color-success:   var(--green-500);
   --icon-color-warning:   var(--yellow-500);
   --icon-color-error:     var(--red-500);
@@ -91,6 +93,7 @@ Set `data-theme` on the root element. Adding a new theme requires only a new CSS
   --icon-color-disabled:  var(--white-alpha-30);
   --icon-color-brand:     var(--purple-300);
   --icon-color-on-brand:  var(--base-white);
+  --icon-color-on-error:  var(--base-white);
   --icon-color-success:   var(--green-400);
   --icon-color-warning:   var(--yellow-400);
   --icon-color-error:     var(--red-400);
@@ -112,6 +115,7 @@ Set `data-theme` on the root element. Adding a new theme requires only a new CSS
 | `icon/disabled` | `primitive/neutral-300` | `primitive/white-alpha-30` | Fill color |
 | `icon/brand` | `primitive/purple-500` | `primitive/purple-300` | Fill color |
 | `icon/on-brand` | `primitive/base-white` | `primitive/base-white` | Fill color |
+| `icon/on-error` | `primitive/base-white` | `primitive/base-white` | Fill color |
 | `icon/success` | `primitive/green-500` | `primitive/green-400` | Fill color |
 | `icon/warning` | `primitive/yellow-500` | `primitive/yellow-400` | Fill color |
 | `icon/error` | `primitive/red-500` | `primitive/red-400` | Fill color |

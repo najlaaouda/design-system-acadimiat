@@ -2,7 +2,7 @@
 name: Typography Semantic Tokens
 tier: Semantic
 status: Active
-last-updated: 2026-06-08
+last-updated: 2026-07-07
 maintainer: n.ouda@eltgcc.com
 owner: acadimiat
 ---
@@ -53,6 +53,7 @@ Primitive values are defined in `Foundations/Typography.md`.
 
 - All roles use `font-family-arabic` by default — Arabic is the primary language.
 - `type-display` and `type-heading-1/2` use `font-family-display`, which resolves to **El Messiri** on the landing page via `[data-product="landing"]`.
+- On dashboard-heavy interfaces (app UI, admin panels), `font-family-arabic` resolves to **Readex Pro** via `[data-product="dashboard"]` — every role built on it (Label, Heading 3–5, Body, Caption, Overline) inherits this automatically. Button and Card are dashboard components and use this variant.
 - When English content is present, swap `font-family-arabic` for `font-family-latin` at the component level. Token names stay the same.
 - Never apply `letter-spacing` to Arabic text.
 
@@ -346,6 +347,16 @@ Only display, heading, and body-lg roles change size across breakpoints. Body, l
 
   --type-heading-2-family:    var(--font-family-display-landing);
   --type-heading-2-weight:    var(--font-weight-display);         /* 480 */
+}
+
+/* ── Dashboard / App Theme ────────────────────────────────── */
+/* Add data-product="dashboard" to <html> on dashboard-heavy   */
+/* interfaces (app UI, admin panels). Overriding the single    */
+/* --font-family-arabic primitive cascades into every          */
+/* --type-*-family role below it — no per-role overrides       */
+/* needed. Token names never change, only the resolved value.  */
+[data-product="dashboard"] {
+  --font-family-arabic: var(--font-family-arabic-alt); /* Readex Pro */
 }
 ```
 

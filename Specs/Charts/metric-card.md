@@ -86,7 +86,7 @@ The trend badge combines an icon + percentage value in a pill.
 | Badge text (negative) | `--text-color-error` |
 | Badge text (neutral) | `--text-color-secondary` |
 | Badge radius | `--radius-full` |
-| Badge padding | `--spacing-inset-xs` inline, `--spacing-inset-xs` block |
+| Badge padding | `--spacing-xs` inline, `--spacing-xs` block |
 | Badge typography | `type-label-sm` |
 | Icon | `trending-up` / `trending-down` / `minus` |
 | Icon size | `--icon-size-sm` (18px) |
@@ -112,12 +112,12 @@ The trend badge combines an icon + percentage value in a pill.
 
 | Element | Token | Value |
 |---------|-------|-------|
-| Card padding | `--spacing-inset-xl` | 24px |
-| Gap: label → value | `--spacing-stack-xs` | 4px |
-| Gap: value → trend | `--spacing-stack-xs` | 4px |
-| Gap: trend → period | `--spacing-inline-xs` | 4px |
-| Gap: value → sparkline | `--spacing-stack-md` | 16px |
-| Gap between icon and % | `--spacing-inline-xs` | 4px |
+| Card padding | `--spacing-lg` | 24px |
+| Gap: label → value | `--spacing-xs` | 4px |
+| Gap: value → trend | `--spacing-xs` | 4px |
+| Gap: trend → period | `--spacing-xs` | 4px |
+| Gap: value → sparkline | `--spacing-md` | 16px |
+| Gap between icon and % | `--spacing-xs` | 4px |
 
 ### Typography
 

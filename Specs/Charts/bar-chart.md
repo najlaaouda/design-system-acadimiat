@@ -104,11 +104,11 @@ When a bar represents a semantic state (positive/negative performance):
 
 | Element | Token | Value |
 |---------|-------|-------|
-| Container padding | `--spacing-inset-xl` | 24px |
+| Container padding | `--spacing-lg` | 24px |
 | Gap between bars (grouped) | 4px (fixed) | — |
 | Gap between bar groups | 12px (fixed) | — |
-| Gap: title → chart | `--spacing-stack-md` | 16px |
-| Gap: chart → legend | `--spacing-stack-sm` | 8px |
+| Gap: title → chart | `--spacing-md` | 16px |
+| Gap: chart → legend | `--spacing-sm` | 8px |
 
 ### Typography
 

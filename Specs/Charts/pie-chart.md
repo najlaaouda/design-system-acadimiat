@@ -110,10 +110,10 @@ When categories exceed 6 or slices are too small, group them into a single "Othe
 
 | Element | Token | Value |
 |---------|-------|-------|
-| Container padding | `--spacing-inset-xl` | 24px |
-| Gap: title → chart | `--spacing-stack-md` | 16px |
-| Gap: chart → legend | `--spacing-stack-md` | 16px |
-| Legend item gap | `--spacing-inline-sm` | 8px |
+| Container padding | `--spacing-lg` | 24px |
+| Gap: title → chart | `--spacing-md` | 16px |
+| Gap: chart → legend | `--spacing-md` | 16px |
+| Legend item gap | `--spacing-sm` | 8px |
 
 ### Typography
 

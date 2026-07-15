@@ -97,9 +97,9 @@ The Line Chart visualizes data points connected by lines to show **trends over t
 
 | Element | Token | Value |
 |---------|-------|-------|
-| Container padding | `--spacing-inset-xl` | 24px |
-| Gap: title → chart | `--spacing-stack-md` | 16px |
-| Gap: chart → legend | `--spacing-stack-sm` | 8px |
+| Container padding | `--spacing-lg` | 24px |
+| Gap: title → chart | `--spacing-md` | 16px |
+| Gap: chart → legend | `--spacing-sm` | 8px |
 
 ### Typography
 

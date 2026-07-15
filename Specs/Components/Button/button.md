@@ -2,10 +2,10 @@
 name: Button
 tier: Component
 status: Active
-last-updated: 2026-06-09
+last-updated: 2026-07-07
 maintainer: n.ouda@eltgcc.com
 owner: acadimiat
-
+---
 
 # Button — Component Spec
 
@@ -123,10 +123,10 @@ Height is a fixed constraint. Icons and text are vertically centered inside the 
 
 | Size | Height | padding-inline | Icon Size | Typography | Gap (icon ↔ text) | Radius |
 |------|--------|----------------|-----------|------------|-------------------|--------|
-| XLarge | 56px | `spacing-inset-xl` — 24px | `icon-size-feature` — 24px | `type-label-lg` | `spacing-inline-sm` — 8px | `radius-lg` — 12px |
-| Large | 48px | `spacing-inset-xl` — 24px | `icon-size-default` — 20px | `type-label-lg` | `spacing-inline-sm` — 8px | `radius-lg` — 12px |
-| Medium | 40px | `spacing-inset-lg` — 16px | `icon-size-default` — 20px | `type-label` | `spacing-inline-sm` — 8px | `radius-md` — 8px |
-| Small | 32px | `spacing-inset-md` — 12px | `icon-size-inline` — 16px | `type-label-sm` | `spacing-inline-xs` — 4px | `radius-md` — 8px |
+| XLarge | 56px | `spacing-lg` — 24px | `icon-size-feature` — 24px | `type-label-lg` | `spacing-sm` — 8px | `radius-lg` — 12px |
+| Large | 48px | `spacing-lg` — 24px | `icon-size-default` — 20px | `type-label-lg` | `spacing-sm` — 8px | `radius-lg` — 12px |
+| Medium | 40px | `spacing-md` — 16px | `icon-size-default` — 20px | `type-label` | `spacing-sm` — 8px | `radius-md` — 8px |
+| Small | 32px | `spacing-sm` — 8px | `icon-size-inline` — 16px | `type-label-sm` | `spacing-xs` — 4px | `radius-md` — 8px |
 
 ### Icon-Only Sizes
 
@@ -151,6 +151,7 @@ Radius shape is a separate axis from size. Any size can use any shape — apply 
 
 > Shape modifiers override `--btn-radius` only — all other size tokens remain unchanged.
 > Pill icon-only buttons become perfect circles.
+> **Figma note:** the component library models Shape as a 2-value property — `Rounded` / `Pill` only. The Default (no-modifier) look is not selectable as a Button instance in Figma, though it remains valid in code via the base `.btn` class with no shape modifier applied.
 
 ---
 
@@ -238,17 +239,19 @@ No visible label. The accessible label is provided via `aria-label`.
 
 | Property | XLarge | Large | Medium | Small |
 |----------|--------|-------|--------|-------|
-| `padding-inline` | `--spacing-inset-xl` (24px) | `--spacing-inset-xl` (24px) | `--spacing-inset-lg` (16px) | `--spacing-inset-md` (12px) |
-| `gap` (icon ↔ text) | `--spacing-inline-sm` (8px) | `--spacing-inline-sm` (8px) | `--spacing-inline-sm` (8px) | `--spacing-inline-xs` (4px) |
+| `padding-inline` | `--spacing-lg` (24px) | `--spacing-lg` (24px) | `--spacing-md` (16px) | `--spacing-sm` (8px) |
+| `gap` (icon ↔ text) | `--spacing-sm` (8px) | `--spacing-sm` (8px) | `--spacing-sm` (8px) | `--spacing-xs` (4px) |
 
 ### Typography Tokens
 
-| Size | Token | Font | Size | Weight | Line-height |
-|------|-------|------|------|--------|-------------|
-| XLarge | `type-label-lg` | IBM Plex Sans Arabic | 16px | semibold (600) | normal |
-| Large | `type-label-lg` | IBM Plex Sans Arabic | 16px | semibold (600) | normal |
-| Medium | `type-label` | IBM Plex Sans Arabic | 14px | semibold (600) | normal |
-| Small | `type-label-sm` | IBM Plex Sans Arabic | 12px | semibold (600) | normal |
+Font resolves via `--type-[role]-family`, which is `font-family-arabic` (IBM Plex Sans Arabic) by default and `font-family-arabic-alt` (Readex Pro) under `[data-product="dashboard"]` — see `Specs/Semantic/typography.md`. Size/weight/line-height values below are the token's actual resolved values per `Specs/Semantic/typography.md` (previously mis-annotated here).
+
+| Size | Token | Size | Weight | Line-height |
+|------|-------|------|--------|-------------|
+| XLarge | `type-label-lg` | 18px | semibold (600) | 1.5 |
+| Large | `type-label-lg` | 18px | semibold (600) | 1.5 |
+| Medium | `type-label` | 16px | semibold (600) | 1.5 |
+| Small | `type-label-sm` | 14px | medium (500) | 1.5 |
 
 ### Icon Size Tokens
 
@@ -361,8 +364,8 @@ No visible label. The accessible label is provided via `aria-label`.
 /* ── Sizes ────────────────────────────────────────────── */
 .btn-xl {
   --btn-height:         56px;
-  --btn-padding-inline: var(--spacing-inset-xl);   /* 24px */
-  --btn-gap:            var(--spacing-inline-sm);  /* 8px  */
+  --btn-padding-inline: var(--spacing-lg);   /* 24px */
+  --btn-gap:            var(--spacing-sm);  /* 8px  */
   --btn-radius:         var(--radius-lg);          /* 12px */
   --btn-icon-size:      var(--icon-size-feature);  /* 24px */
   font-size:            var(--type-label-lg-size);
@@ -371,8 +374,8 @@ No visible label. The accessible label is provided via `aria-label`.
 
 .btn-lg {
   --btn-height:         48px;
-  --btn-padding-inline: var(--spacing-inset-xl);   /* 24px */
-  --btn-gap:            var(--spacing-inline-sm);  /* 8px  */
+  --btn-padding-inline: var(--spacing-lg);   /* 24px */
+  --btn-gap:            var(--spacing-sm);  /* 8px  */
   --btn-radius:         var(--radius-lg);          /* 12px */
   --btn-icon-size:      var(--icon-size-default);  /* 20px */
   font-size:            var(--type-label-lg-size);
@@ -381,8 +384,8 @@ No visible label. The accessible label is provided via `aria-label`.
 
 .btn-md {
   --btn-height:         40px;
-  --btn-padding-inline: var(--spacing-inset-lg);   /* 16px */
-  --btn-gap:            var(--spacing-inline-sm);  /* 8px  */
+  --btn-padding-inline: var(--spacing-md);   /* 16px */
+  --btn-gap:            var(--spacing-sm);  /* 8px  */
   --btn-radius:         var(--radius-md);          /* 8px  */
   --btn-icon-size:      var(--icon-size-default);  /* 20px */
   font-size:            var(--type-label-size);
@@ -391,8 +394,8 @@ No visible label. The accessible label is provided via `aria-label`.
 
 .btn-sm {
   --btn-height:         32px;
-  --btn-padding-inline: var(--spacing-inset-md);   /* 12px */
-  --btn-gap:            var(--spacing-inline-xs);  /* 4px  */
+  --btn-padding-inline: var(--spacing-sm);         /* 8px  */
+  --btn-gap:            var(--spacing-xs);  /* 4px  */
   --btn-radius:         var(--radius-md);          /* 8px  */
   --btn-icon-size:      var(--icon-size-inline);   /* 16px */
   font-size:            var(--type-label-sm-size);
@@ -623,40 +626,61 @@ When a button triggers an async action:
 ### Component Variants
 
 ```
-Button
+Button (component set — 160 variants)
+├── Variant: Primary / Secondary / Tertiary / Link
+├── Size:    XLarge / Large / Medium / Small
+├── State:   Default / Hover / Pressed / Disabled / Focus
+├── Shape:   Rounded / Pill   (no Default — see Figma note above)
+├── Show Leading Icon:  boolean component property
+├── Leading Icon:       instance-swap component property
+├── Show Trailing Icon: boolean component property
+└── Trailing Icon:      instance-swap component property
+
+Button Icon Only (separate component set — 120 variants)
 ├── Variant: Primary / Secondary / Tertiary
 ├── Size:    XLarge / Large / Medium / Small
-├── Shape:   Default / Rounded / Pill
 ├── State:   Default / Hover / Pressed / Disabled / Focus
-└── Icon:    None / Leading / Trailing / Icon Only
+├── Shape:   Rounded / Pill  (Pill → perfect circle)
+└── Icon:    instance-swap component property
 ```
+
+> Icon presence is modeled as component properties (boolean visibility + instance-swap), not a variant value — this keeps the variant matrix to Variant×Size×State×Shape instead of multiplying by every icon combination. Icon-only buttons are a dedicated component set, not a value of the main Button's Icon property, since their sizing (square, fixed width=height) differs structurally from the label-bearing Button.
+
+> Container background fill, icon fill, and corner radius are centralized in the `Button` Figma variable collection (alongside Height/Padding Inline/Gap/Icon Size), each aliasing the corresponding Semantic token — components bind to `Button/Background *`, `Button/Icon *`, and `Button/Radius *`, not to Semantic directly. This keeps every button-specific value in one place while still resolving down to Semantic → Primitive.
 
 ### Figma Variable Bindings
 
 | Layer | Variable |
 |-------|----------|
-| Container fill (Primary / Default) | `semantic/bg-color-brand` |
-| Container fill (Primary / Hover) | `semantic/bg-color-brand-hover` |
-| Container fill (Primary / Pressed) | `semantic/bg-color-brand-pressed` |
-| Container fill (Disabled) | `semantic/bg-color-disabled` |
-| Container fill (Secondary / Hover) | `semantic/bg-color-brand-subtle` |
+| Container fill (Primary / Default, Focus) | `Button/Background Brand` → `semantic/bg-color-brand` |
+| Container fill (Primary / Hover) | `Button/Background Brand Hover` → `semantic/bg-color-brand-hover` |
+| Container fill (Primary / Pressed) | `Button/Background Brand Pressed` → `semantic/bg-color-brand-pressed` |
+| Container fill (Disabled — any variant) | `Button/Background Disabled` → `semantic/bg-color-disabled` |
+| Container fill (Secondary / Tertiary / Link — Hover) | `Button/Background Brand Subtle` → `semantic/bg-color-brand-subtle` |
+| Container fill (Secondary / Tertiary / Link — Pressed) | `Button/Background Brand Hover` → `semantic/bg-color-brand-hover` |
+| Container fill (Destructive Primary / Default, Focus) | `Button/Background Error` → `semantic/bg-color-error` |
+| Container fill (Destructive Primary / Hover) | `Button/Background Error Hover` → `semantic/bg-color-error-hover` |
+| Container fill (Destructive Primary / Pressed) | `Button/Background Error Pressed` → `semantic/bg-color-error-pressed` |
+| Container fill (Destructive Secondary / Tertiary — Hover) | `Button/Background Error Subtle` → `semantic/bg-color-error-subtle` |
+| Container fill (Destructive Secondary / Tertiary — Pressed) | `Button/Background Error Hover` → `semantic/bg-color-error-hover` |
 | Container stroke (Secondary) | `semantic/border-color-brand` |
+| Container stroke (Destructive Secondary) | `semantic/border-color-error` |
 | Container stroke (Secondary / Disabled) | `semantic/border-color-disabled` |
 | Label fill (Primary) | `semantic/text-color-on-brand` |
 | Label fill (Secondary / Tertiary) | `semantic/text-color-brand` |
 | Label fill (Disabled) | `semantic/text-color-disabled` |
-| Icon fill (Primary) | `semantic/icon-color-on-brand` |
-| Icon fill (Secondary / Tertiary) | `semantic/icon-color-brand` |
-| Icon fill (Disabled) | `semantic/icon-color-disabled` |
-| Corner radius (XL / LG — Default) | `semantic/radius-lg` |
-| Corner radius (MD / SM — Default) | `semantic/radius-md` |
-| Corner radius (any size — Rounded) | `semantic/radius-xl` |
-| Corner radius (any size — Pill) | `primitive/radius-full` |
-| Padding inline (XL / LG) | `semantic/spacing-inset-xl` |
-| Padding inline (MD) | `semantic/spacing-inset-lg` |
-| Padding inline (SM) | `semantic/spacing-inset-md` |
-| Gap (XL / LG / MD) | `semantic/spacing-inline-sm` |
-| Gap (SM) | `semantic/spacing-inline-xs` |
+| Icon fill (Primary / Destructive Primary — Default, Hover, Pressed, Focus) | `Button/Icon On Brand` → `semantic/icon-color-on-brand` |
+| Icon fill (Secondary / Tertiary / Link) | `Button/Icon Brand` → `semantic/icon-color-brand` |
+| Icon fill (Destructive Primary) | `Button/Icon On Error` → `semantic/icon-color-on-error` |
+| Icon fill (Destructive Secondary / Tertiary) | `Button/Icon Error` → `semantic/icon-color-error` |
+| Icon fill (Disabled — any variant) | `Button/Icon Disabled` → `semantic/icon-color-disabled` |
+| Corner radius (any size — Rounded) | `Button/Radius Rounded` → `semantic/radius-xl` |
+| Corner radius (any size — Pill) | `Button/Radius Pill` → `semantic/radius-full` |
+| Padding inline (XL / LG) | `semantic/spacing-lg` |
+| Padding inline (MD) | `semantic/spacing-md` |
+| Padding inline (SM) | `semantic/spacing-sm` |
+| Gap (XL / LG / MD) | `semantic/spacing-sm` |
+| Gap (SM) | `semantic/spacing-xs` |
 | Icon size (XL) | `semantic/icon-size-feature` |
 | Icon size (LG / MD) | `semantic/icon-size-default` |
 | Icon size (SM) | `semantic/icon-size-inline` |

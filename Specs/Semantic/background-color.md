@@ -2,7 +2,7 @@
 name: Background Color Semantic Tokens
 tier: Semantic
 status: Active
-last-updated: 2026-06-08
+last-updated: 2026-07-07
 maintainer: n.ouda@eltgcc.com
 owner: acadimiat
 ---
@@ -63,7 +63,10 @@ Set `data-theme` on the root element. Adding a new theme requires only a new CSS
 | `bg-color-brand-pressed` | → `purple-700` | → `purple-700` | Pressed / active state on brand backgrounds |
 | `bg-color-success` | → `green-50` | → `green-900` | Success alert backgrounds, toasts |
 | `bg-color-warning` | → `yellow-50` | → `yellow-900` | Warning alert backgrounds |
-| `bg-color-error` | → `red-50` | → `red-900` | Error alert backgrounds, field error fills |
+| `bg-color-error` | → `red-500` | → `red-500` | Destructive button fill, solid error surfaces |
+| `bg-color-error-hover` | → `red-600` | → `red-600` | Hover state on error/destructive backgrounds |
+| `bg-color-error-pressed` | → `red-700` | → `red-700` | Pressed / active state on error/destructive backgrounds |
+| `bg-color-error-subtle` | → `red-50` | → `red-900` | Error alert backgrounds, field error fills |
 | `bg-color-info` | → `blue-50` | → `blue-900` | Info alert backgrounds |
 
 ---
@@ -85,7 +88,10 @@ Set `data-theme` on the root element. Adding a new theme requires only a new CSS
   --bg-color-brand-pressed:  var(--purple-700);
   --bg-color-success:        var(--green-50);
   --bg-color-warning:        var(--yellow-50);
-  --bg-color-error:          var(--red-50);
+  --bg-color-error:          var(--red-500);
+  --bg-color-error-hover:    var(--red-600);
+  --bg-color-error-pressed:  var(--red-700);
+  --bg-color-error-subtle:   var(--red-50);
   --bg-color-info:           var(--blue-50);
 }
 
@@ -102,7 +108,10 @@ Set `data-theme` on the root element. Adding a new theme requires only a new CSS
   --bg-color-brand-pressed:  var(--purple-700);
   --bg-color-success:        var(--green-900);
   --bg-color-warning:        var(--yellow-900);
-  --bg-color-error:          var(--red-900);
+  --bg-color-error:          var(--red-500);
+  --bg-color-error-hover:    var(--red-600);
+  --bg-color-error-pressed:  var(--red-700);
+  --bg-color-error-subtle:   var(--red-900);
   --bg-color-info:           var(--blue-900);
 }
 ```
@@ -126,5 +135,8 @@ Set `data-theme` on the root element. Adding a new theme requires only a new CSS
 | `bg/brand-pressed` | `primitive/purple-700` | `primitive/purple-700` | Fill color |
 | `bg/success` | `primitive/green-50` | `primitive/green-900` | Fill color |
 | `bg/warning` | `primitive/yellow-50` | `primitive/yellow-900` | Fill color |
-| `bg/error` | `primitive/red-50` | `primitive/red-900` | Fill color |
+| `bg/error` | `primitive/red-500` | `primitive/red-500` | Fill color |
+| `bg/error-hover` | `primitive/red-600` | `primitive/red-600` | Fill color |
+| `bg/error-pressed` | `primitive/red-700` | `primitive/red-700` | Fill color |
+| `bg/error-subtle` | `primitive/red-50` | `primitive/red-900` | Fill color |
 | `bg/info` | `primitive/blue-50` | `primitive/blue-900` | Fill color |

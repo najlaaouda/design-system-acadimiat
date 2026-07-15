@@ -1,10 +1,10 @@
 ---
 project: Acadimiat Landing Page
 status: Active
-last-updated: 2026-06-09
+last-updated: 2026-07-08
 maintainer: n.ouda@eltgcc.com
 ds: Acadimiat Design System
-version: v1.0.0
+version: v1.2.0
 acadimiat-theme: light | dark
 ---
 
@@ -172,7 +172,7 @@ Every component file follows this exact structure:
 1. Philosophy
 2. When to Use / When to Avoid
 3. Anatomy (ASCII diagram)
-4. Variants & States (all 5: Default, Hover, Pressed, Disabled, Focus)
+4. Variants & States (all 5: Default, Hover, Pressed, Disabled, Focus — plus contextual states such as Selected/Active when the component needs them, e.g. Card, Tabs, Bottom Navigation)
 5. Focus State spec
 6. Sizes (token name + resolved px for every dimension)
 7. Design Tokens Reference (color, spacing, typography, icon size, radius — full table)
@@ -186,6 +186,10 @@ Every component file follows this exact structure:
 | Component | File | Status |
 |-----------|------|--------|
 | Button | `Specs/Components/Button/button.md` | Active |
+| Card | `Specs/Components/Card/card.md` | Active |
+| Bottom Navigation | `Specs/Components/BottomNav/bottom-nav.md` | Active |
+| Tabs | `Specs/Components/Tabs/tabs.md` | Active |
+| Text Input Field | `Specs/Components/Field/field.md` | Active |
 
 ### Current Charts
 
@@ -242,9 +246,15 @@ Every interactive element uses the same focus ring — defined once at system le
 |-----------------|----------------|--------------|
 | Button hover (color + shadow + lift) | `duration-normal` (200ms) | `easing-out` — `cubic-bezier(0,0,0.2,1)` |
 | Button press (scale sink) | `duration-fast` (150ms) | `easing-out` |
-| Dropdown / tooltip / tab | `duration-normal` (250ms) | `easing-out` |
+| Card hover lift (Elevated variant) | `duration-normal` (200ms) | `easing-out` |
+| Bottom Nav item activate | `duration-normal` (200ms) | `easing-out` |
+| Dropdown / tooltip | `duration-normal` (250ms) | `easing-out` |
+| Tab indicator (grow/slide) | `duration-normal` (250ms) | `easing-in-out` |
+| Field border (hover/focus/error) | `duration-normal` (200ms) | `easing-out` |
 | Modal / drawer / page transition | `duration-slow` (350ms) | `easing-in-out` |
 | Loading spinner (`btn-spin`) | 600ms | `easing-linear` — infinite loop |
+
+> Tab indicator uses `easing-in-out`, not `easing-out` — it matches `Foundations/Motion.md`'s "Tab indicator" row, which is deliberately distinct from the dropdown/tooltip entering-only easing.
 
 Always wrap transitions in `@media (prefers-reduced-motion: reduce) { transition: none; }`.
 
